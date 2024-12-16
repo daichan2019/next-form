@@ -1,0 +1,57 @@
+{
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "suspicious": {
+        "noRedundantUseStrict": "error",
+        "noConsoleLog": "error"
+      },
+      "nursery": {
+        "useSortedClasses": "error",
+        "noRestrictedImports": "error"
+      },
+      "complexity": {
+        "noUselessConstructor": "error",
+        "noUselessFragments": "error",
+        "noUselessCatch": "error",
+        "noUselessThisAlias": "error",
+        "noForEach": "warn"
+      },
+      "style": {
+        "noNegationElse": "warn",
+        "useBlockStatements": "error",
+        "useShorthandArrayType": "error",
+        "useSingleCaseStatement": "error",
+        "useTemplate": "error",
+        "noParameterProperties": "error"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    }
+  },
+  "files": {
+    "ignore": ["**/node_modules/**", "**/dist/**", "**/build/**", "**/.next/**"]
+  }
+}
