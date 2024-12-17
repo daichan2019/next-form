@@ -3,6 +3,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const main = async () => {
+  await prisma.reservation.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.room.deleteMany();
+
   // 会議室データの作成
   const rooms = await Promise.all([
     prisma.room.create({
@@ -25,13 +29,28 @@ const main = async () => {
     }),
   ]);
 
+  // サンプルユーザーデータの作成
+  const users = await Promise.all([
+    prisma.user.create({
+      data: {
+        name: '山田太郎',
+        email: 'yamada@example.com',
+      },
+    }),
+    prisma.user.create({
+      data: {
+        name: '鈴木花子',
+        email: 'suzuki@example.com',
+      },
+    }),
+  ]);
+
   // サンプル予約データの作成
   await Promise.all([
     prisma.reservation.create({
       data: {
         roomId: rooms[0].id,
-        userName: '山田太郎',
-        email: 'yamada@example.com',
+        userId: users[0].id,
         date: new Date('2024-04-01'),
         startTime: '10:00',
         endTime: '11:00',
@@ -42,8 +61,7 @@ const main = async () => {
     prisma.reservation.create({
       data: {
         roomId: rooms[1].id,
-        userName: '鈴木花子',
-        email: 'suzuki@example.com',
+        userId: users[1].id,
         date: new Date('2024-04-01'),
         startTime: '14:00',
         endTime: '15:00',

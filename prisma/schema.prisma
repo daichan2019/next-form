@@ -14,14 +14,16 @@ model Room {
   reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+
+  @@map("rooms")
 }
 
 model Reservation {
   id        String   @id @default(cuid())
   roomId    String
   room      Room     @relation(fields: [roomId], references: [id])
-  userName  String
-  email     String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   date      DateTime
   startTime String
   endTime   String
@@ -29,6 +31,19 @@ model Reservation {
   status    Status   @default(PENDING)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("reservations")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@map("users")
 }
 
 enum Status {
